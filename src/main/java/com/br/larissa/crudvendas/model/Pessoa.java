@@ -71,7 +71,7 @@ public class Pessoa implements Serializable {
         this.nr_ddd = nr_ddd;
     }
 
-    public String getDs_endereco() {
+    public   String getDs_endereco() {
         return ds_endereco;
     }
 
