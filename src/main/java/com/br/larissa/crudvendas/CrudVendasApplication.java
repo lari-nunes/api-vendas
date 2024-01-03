@@ -8,6 +8,7 @@ public class CrudVendasApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(CrudVendasApplication.class, args);
+		System.out.println("RODOU");
 	}
-
+	
 }

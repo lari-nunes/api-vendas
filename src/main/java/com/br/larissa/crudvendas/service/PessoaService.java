@@ -15,6 +15,13 @@ public class PessoaService {
     private PessoaRepository pessoaRepository;
 
     public Pessoa gravarPessoa(Pessoa pessoa){
+
+        if (pessoaRepository.findByCpf(pessoa.getCpf()).isPresent()) {
+            throw new RuntimeException("Este CPF já está cadastrado.");
+        }
+       if (pessoa.getNm_cliente() == null || pessoa.getCpf() == null) {
+            throw new IllegalArgumentException("O nome e o CPF não podem ser nulos.");
+        }
         return pessoaRepository.save(pessoa);
     }
 

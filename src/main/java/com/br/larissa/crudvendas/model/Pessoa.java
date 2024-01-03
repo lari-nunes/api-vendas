@@ -13,10 +13,10 @@ public class Pessoa implements Serializable {
     @Column(name = "id_cliente")
     private Integer id_cliente;
 
-    @Column(name = "nr_cpf")
-    private String nr_cpf;
+    @Column(unique = true)
+    private String cpf;
 
-    @Column(name = "nm_cliente")
+    @Column(unique = true)
     private String nm_cliente;
 
     @Column(name = "nr_telefone")
@@ -39,12 +39,12 @@ public class Pessoa implements Serializable {
         this.id_cliente = id_cliente;
     }
 
-    public String getNr_cpf() {
-        return nr_cpf;
+    public String getCpf() {
+        return cpf;
     }
 
-    public void setNr_cpf(String nr_cpf) {
-        this.nr_cpf = nr_cpf;
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     public String getNm_cliente() {

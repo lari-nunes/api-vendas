@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,12 +15,19 @@ import java.util.Optional;
 @RequestMapping("/pessoa")
 public class PessoaController {
 
+    private List<Pessoa> pessoas = new ArrayList<>();
+    private Long idPessoa = Long.valueOf(1);
+
     @Autowired
     private PessoaService pessoaService;
 
     @PostMapping
     public ResponseEntity<Object> gravarPessoa(@RequestBody Pessoa pessoa) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(pessoaService.gravarPessoa(pessoa));
+        try {
+            return ResponseEntity.status(HttpStatus.CREATED).body(pessoaService.gravarPessoa(pessoa));
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
     }
 
     @GetMapping
@@ -29,6 +37,10 @@ public class PessoaController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Object> listarPessoaId(@PathVariable(value = "id") Integer id) {
+        Optional<Pessoa> pessoa = pessoaService.buscarPessoaId(id);
+        if(pessoa.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Essa pessoa não existe.");
+        }
         return ResponseEntity.status(HttpStatus.OK).body(pessoaService.buscarPessoaId(id));
     }
 
@@ -43,7 +55,7 @@ public class PessoaController {
 
             Pessoa pessoa2 = pessoa1.get();
             pessoa2.setNm_cliente(pessoa.getNm_cliente());
-            pessoa2.setNr_cpf(pessoa.getNr_cpf());
+            pessoa2.setCpf(pessoa.getCpf());
             pessoa2.setDs_endereco(pessoa.getDs_endereco());
             pessoa2.setNr_ddd(pessoa.getNr_ddd());
             pessoa2.setNr_telefone(pessoa.getNr_telefone());
