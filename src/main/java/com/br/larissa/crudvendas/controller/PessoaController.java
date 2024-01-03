@@ -15,9 +15,6 @@ import java.util.Optional;
 @RequestMapping("/pessoa")
 public class PessoaController {
 
-    private List<Pessoa> pessoas = new ArrayList<>();
-    private Long idPessoa = Long.valueOf(1);
-
     @Autowired
     private PessoaService pessoaService;
 
