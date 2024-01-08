@@ -1,5 +1,6 @@
 package com.br.larissa.crudvendas.service;
 
+import com.br.larissa.crudvendas.exception.NomeCategoriaDuplicadoException;
 import com.br.larissa.crudvendas.model.Categoria;
 import com.br.larissa.crudvendas.repository.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,9 @@ public class CategoriaService {
     private CategoriaRepository categoriaRepository;
 
     public Categoria gravarCategoria(Categoria categoria){
+        if (categoriaRepository.existsByNm_categoria(categoria.getNm_categoria())) {
+            throw new NomeCategoriaDuplicadoException("Já existe uma categoria com o mesmo nome");
+        }
         return categoriaRepository.save(categoria);
     }
 

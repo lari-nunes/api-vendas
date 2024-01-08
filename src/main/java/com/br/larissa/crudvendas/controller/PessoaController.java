@@ -2,6 +2,7 @@ package com.br.larissa.crudvendas.controller;
 
 import com.br.larissa.crudvendas.model.Pessoa;
 import com.br.larissa.crudvendas.service.PessoaService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,11 +20,15 @@ public class PessoaController {
     private PessoaService pessoaService;
 
     @PostMapping
-    public ResponseEntity<Object> gravarPessoa(@RequestBody Pessoa pessoa) {
+    public ResponseEntity<Object> gravarPessoa(@RequestBody @Valid Pessoa pessoa) {
         try {
             return ResponseEntity.status(HttpStatus.CREATED).body(pessoaService.gravarPessoa(pessoa));
         } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+            if ("CPF inválido".equals(e.getMessage())) {
+                return ResponseEntity.badRequest().body("Por favor, insira um CPF válido");
+            } else {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+            }
         }
     }
 

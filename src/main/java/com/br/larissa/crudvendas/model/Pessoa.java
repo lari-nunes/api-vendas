@@ -1,6 +1,7 @@
 package com.br.larissa.crudvendas.model;
 
 import jakarta.persistence.*;
+import org.hibernate.validator.constraints.br.CPF;
 
 import java.io.Serializable;
 
@@ -13,7 +14,7 @@ public class Pessoa implements Serializable {
     @Column(name = "id_cliente")
     private Integer id_cliente;
 
-    @Column(unique = true)
+    @CPF
     private String cpf;
 
     @Column(unique = true)
