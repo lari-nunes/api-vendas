@@ -41,7 +41,7 @@ public class CategoriaController {
             }
 
             Categoria categoria2 = categoria1.get();
-            categoria2.setNm_categoria(categoria.getNm_categoria());
+            categoria2.setNome(categoria.getNome());
 
             Categoria categoriaAtualizada = categoriaService.gravarCategoria(categoria2);
             return ResponseEntity.status(HttpStatus.OK).body(categoriaAtualizada);

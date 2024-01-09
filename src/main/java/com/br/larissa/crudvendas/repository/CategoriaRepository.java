@@ -1,10 +1,13 @@
 package com.br.larissa.crudvendas.repository;
 
 import com.br.larissa.crudvendas.model.Categoria;
+import com.br.larissa.crudvendas.model.Pessoa;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.Optional;
 
 public interface CategoriaRepository extends JpaRepository<Categoria, Integer> {
 
-    boolean existsByNm_categoria(String nm_categoria);
+    Optional<Boolean> existsByNome(String nome);
 
 }

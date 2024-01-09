@@ -16,7 +16,6 @@ public class PessoaService {
     private PessoaRepository pessoaRepository;
 
     public Pessoa gravarPessoa(Pessoa pessoa) {
-        // Verifica se o CPF já está cadastrado
         if (pessoaRepository.findByCpf(pessoa.getCpf()).isPresent()) {
             throw new RuntimeException("Este CPF já está cadastrado.");
         }

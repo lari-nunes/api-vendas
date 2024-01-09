@@ -1,9 +1,11 @@
 package com.br.larissa.crudvendas.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity(name = "PRODUTO")
@@ -19,13 +21,14 @@ public class Produto implements Serializable {
     private String nm_produto;
 
     @Column(name = "dt_validade")
-    private Date dt_validade;
+    private LocalDate dt_validade;
 
     @Column(name = "vl_preco")
     private Double vl_preco;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_categoria")
+    @JsonIgnoreProperties({"hibernateLazyInitializer"}) //  ignora propriedades específicas durante a serialização, como a classe Categoria
     private Categoria categoria;
 
     public Produto() {
@@ -47,11 +50,11 @@ public class Produto implements Serializable {
         this.nm_produto = nm_produto;
     }
 
-    public Date getDt_validade() {
+    public LocalDate getDt_validade() {
         return dt_validade;
     }
 
-    public void setDt_validade(Date dt_validade) {
+    public void setDt_validade(LocalDate dt_validade) {
         this.dt_validade = dt_validade;
     }
 

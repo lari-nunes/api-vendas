@@ -18,6 +18,12 @@ public class ProdutoVendaService {
         return produtoVendaRepository.save(produtoVenda);
     }
 
+    private void calcularValorTotal(ProdutoVenda produtoVenda) {
+        if (produtoVenda.getQt_produto() != null && produtoVenda.getVl_unitario() != null) {
+            produtoVenda.setVl_total(produtoVenda.getQt_produto() * produtoVenda.getVl_unitario());
+        }
+    }
+
     public List<ProdutoVenda> listarProdutoVendas(){
         return produtoVendaRepository.findAll();
     }

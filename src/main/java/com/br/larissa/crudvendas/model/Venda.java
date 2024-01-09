@@ -1,8 +1,10 @@
 package com.br.larissa.crudvendas.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity(name = "VENDA")
@@ -15,10 +17,11 @@ public class Venda implements Serializable {
     private Integer id_venda;
 
     @Column(name = "dt_venda")
-    private Date dt_venda;
+    private LocalDate dt_venda;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_cliente")
+    @JsonIgnoreProperties({"hibernateLazyInitializer"}) //  ignora propriedades específicas durante a serialização, como a classe Pessoa
     private Pessoa pessoa;
 
     public Venda() {
@@ -32,11 +35,11 @@ public class Venda implements Serializable {
         this.id_venda = id_venda;
     }
 
-    public Date getDt_venda() {
+    public LocalDate getDt_venda() {
         return dt_venda;
     }
 
-    public void setDt_venda(Date dt_venda) {
+    public void setDt_venda(LocalDate dt_venda) {
         this.dt_venda = dt_venda;
     }
 
