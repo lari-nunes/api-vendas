@@ -10,5 +10,4 @@ public class CrudVendasApplication {
 		SpringApplication.run(CrudVendasApplication.class, args);
 		System.out.println("RODOU");
 	}
-	
 }

@@ -1,5 +1,6 @@
 package com.br.larissa.crudvendas.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 @Entity(name = "PRODUTO_VENDA")
@@ -21,10 +22,12 @@ public class ProdutoVenda {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_venda")
+    @JsonIgnoreProperties({"hibernateLazyInitializer"})
     private Venda venda;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_produto")
+    @JsonIgnoreProperties({"hibernateLazyInitializer"})
     private Produto produto;
 
     public ProdutoVenda() {

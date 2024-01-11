@@ -1,5 +1,6 @@
 package com.br.larissa.crudvendas.service;
 
+import com.br.larissa.crudvendas.model.Produto;
 import com.br.larissa.crudvendas.model.ProdutoVenda;
 import com.br.larissa.crudvendas.repository.ProdutoVendaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,13 +16,15 @@ public class ProdutoVendaService {
     private ProdutoVendaRepository produtoVendaRepository;
 
     public ProdutoVenda gravarProdutoVenda(ProdutoVenda produtoVenda){
+        calcularValorTotal(produtoVenda);
         return produtoVendaRepository.save(produtoVenda);
     }
 
     private void calcularValorTotal(ProdutoVenda produtoVenda) {
-        if (produtoVenda.getQt_produto() != null && produtoVenda.getVl_unitario() != null) {
-            produtoVenda.setVl_total(produtoVenda.getQt_produto() * produtoVenda.getVl_unitario());
-        }
+        Produto produto = produtoVenda.getProduto();
+        Double preco = produtoVenda.getVl_total();  // Access the correct attribute
+
+        produtoVenda.setVl_total(produtoVenda.getQt_produto() * preco);
     }
 
     public List<ProdutoVenda> listarProdutoVendas(){
