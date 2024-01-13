@@ -1,8 +1,11 @@
 package com.br.larissa.crudvendas.service;
 
+import com.br.larissa.crudvendas.exception.PrecoProdutoNuloException;
 import com.br.larissa.crudvendas.model.Produto;
 import com.br.larissa.crudvendas.model.ProdutoVenda;
+import com.br.larissa.crudvendas.repository.ProdutoRepository;
 import com.br.larissa.crudvendas.repository.ProdutoVendaRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,19 +15,46 @@ import java.util.Optional;
 @Service
 public class ProdutoVendaService {
 
+    private final ProdutoService produtoService;
     @Autowired
     private ProdutoVendaRepository produtoVendaRepository;
 
+    @Autowired
+    public ProdutoVendaService(ProdutoService produtoService) {
+        this.produtoService = produtoService;
+    }
+
     public ProdutoVenda gravarProdutoVenda(ProdutoVenda produtoVenda){
+        carregarProduto(produtoVenda);
         calcularValorTotal(produtoVenda);
         return produtoVendaRepository.save(produtoVenda);
     }
 
-    private void calcularValorTotal(ProdutoVenda produtoVenda) {
-        Produto produto = produtoVenda.getProduto();
-        Double preco = produtoVenda.getVl_total();  // Access the correct attribute
+//    public void calcularValorTotal(ProdutoVenda produtoVenda) {
+//        produtoVenda.setVl_total(produtoVenda.getQt_produto() * produtoVenda.getProduto().getVl_preco());
+//    }
 
-        produtoVenda.setVl_total(produtoVenda.getQt_produto() * preco);
+    private void carregarProduto(ProdutoVenda produtoVenda) {
+        produtoVenda.getProduto().getId_produto();
+    }
+
+    public void calcularValorTotal(ProdutoVenda produtoVenda)  {
+        if (produtoVenda.getProduto() != null) {
+            Optional<Produto> precoProduto = produtoService.buscarProdutoId(produtoVenda.getProduto().getId_produto());
+            Produto produto = precoProduto.get();
+            Double preco = produto.getVl_preco();
+            produtoVenda.setVl_unitario(preco);
+
+            if(preco == null){
+                throw new PrecoProdutoNuloException("O preço do produto é null.");
+
+            }
+            produtoVenda.setVl_total(produtoVenda.getQt_produto() * preco);
+            produtoVenda.getVl_total();
+
+        } else {
+            System.out.println("O produto é null.");
+        }
     }
 
     public List<ProdutoVenda> listarProdutoVendas(){

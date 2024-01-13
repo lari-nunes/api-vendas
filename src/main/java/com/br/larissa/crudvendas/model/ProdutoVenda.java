@@ -20,14 +20,14 @@ public class ProdutoVenda {
     @Column(name = "vl_unitario")
     private Double vl_unitario;
 
+    @JsonIgnoreProperties({"hibernateLazyInitializer"})
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_venda")
-    @JsonIgnoreProperties({"hibernateLazyInitializer"})
     private Venda venda;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_produto")
     @JsonIgnoreProperties({"hibernateLazyInitializer"})
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_produto")
     private Produto produto;
 
     public ProdutoVenda() {
