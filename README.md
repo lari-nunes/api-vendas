@@ -25,7 +25,7 @@ Este projeto é uma API que permite cadastrar clientes, categorias e suas respec
 1. Clona o repositório:
 
 ```bash
-git clone https://github.com/lari-nunes/trabalho-java-spring.git
+git clone https://github.com/lari-nunes/api-vendas.git
 ```
 2. Entre na pasta do projeto
 3. Instale dependências com Maven
