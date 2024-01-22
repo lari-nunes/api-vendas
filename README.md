@@ -1,6 +1,8 @@
 # API RESTful de Vendas 🛒 
 ## Sobre o projeto
-Esta API permite cadastrar clientes, categorias e suas respectivas vendas.
+[![My Skills](https://skillicons.dev/icons?i=java,spring,mysql)](https://skillicons.dev)
+
+Este projeto é uma API que permite cadastrar clientes, categorias e suas respectivas vendas.
 
 ## Índice
 - [Tecnologias](#tecnologias)
