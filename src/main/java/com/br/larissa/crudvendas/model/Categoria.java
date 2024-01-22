@@ -1,12 +1,20 @@
 package com.br.larissa.crudvendas.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.io.Serial;
 import java.io.Serializable;
 
 @Entity(name = "CATEGORIA")
 @Table(name = "CATEGORIA")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Categoria implements Serializable {
 
     @Id
@@ -15,22 +23,4 @@ public class Categoria implements Serializable {
 
     private String nome;
 
-    public Categoria() {
-    }
-
-    public Integer getId_categoria() {
-        return id_categoria;
-    }
-
-    public void setId_categoria(Integer id_categoria) {
-        this.id_categoria = id_categoria;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
 }
