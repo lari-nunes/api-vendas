@@ -28,15 +28,6 @@ public class ProdutoVendaService {
     public ProdutoVenda gravarProdutoVenda(ProdutoVenda produtoVenda){
             calcularValorTotal(produtoVenda);
             return produtoVendaRepository.save(produtoVenda);
-//        } catch (DataIntegrityViolationException e) {
-//            if (e.getMessage().contains("Duplicate entry") && e.getMessage().contains("id_produto")) {
-//                throw new RuntimeException("Erro: Já existe um produto com o ID especificado.");
-//            } else if (e.getMessage().contains("Duplicate entry") && e.getMessage().contains("id_venda")) {
-//                throw new RuntimeException("Erro: Já existe uma venda com o ID especificado.");
-//            } else {
-//                throw e;
-//            }
-//        }
     }
 
     public void calcularValorTotal(ProdutoVenda produtoVenda)  {
@@ -60,15 +51,15 @@ public class ProdutoVendaService {
         return produtoVendaRepository.findAll();
     }
 
-    public Optional<ProdutoVenda> buscarProdutoVendaId(Integer id){
-        return produtoVendaRepository.findById(id);
-    }
-
-    public Optional<ProdutoVenda> atualizarProdutoVendaId(Integer id){
-        return produtoVendaRepository.findById(id);
-    }
-
-    public void deletarProdutoVenda(Optional<ProdutoVenda> produtoVenda){
-        produtoVendaRepository.delete(produtoVenda.get());
-    }
+//    public Optional<ProdutoVenda> buscarProdutoVendaId(Integer id){
+//        return produtoVendaRepository.findById(id);
+//    }
+//
+//    public Optional<ProdutoVenda> atualizarProdutoVendaId(Integer id){
+//        return produtoVendaRepository.findById(id);
+//    }
+//
+//    public void deletarProdutoVenda(Optional<ProdutoVenda> produtoVenda){
+//        produtoVendaRepository.delete(produtoVenda.get());
+//    }
 }

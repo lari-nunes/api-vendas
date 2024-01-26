@@ -6,29 +6,20 @@ import lombok.*;
 
 import java.io.Serializable;
 
-@Entity
-@Table(name = "PRODUTO_VENDA")
+@Embeddable
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProdutoVenda implements Serializable {
+public class ProdutoVendaId implements Serializable {
 
-    @EmbeddedId
-    private ProdutoVendaId id;
-
-    @Column(name = "qt_produto")
-    private Integer qt_produto;
-
-    @Column(name = "vl_total")
-    private Double vl_total;
-
-    @Column(name = "vl_unitario")
-    private Double vl_unitario;
-
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_venda")
     private Venda venda;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_produto")
     private Produto produto;
 }

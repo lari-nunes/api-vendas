@@ -1,6 +1,5 @@
 package com.br.larissa.crudvendas.model;
 
-import com.br.larissa.crudvendas.dto.ProdutoDTO;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
@@ -29,7 +28,7 @@ public class Produto implements Serializable {
     @Column(name = "vl_preco")
     private Double vl_preco;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_categoria")
     @JsonIgnoreProperties({"hibernateLazyInitializer"}) //  ignora propriedades específicas durante a serialização, como a classe Categoria
     private Categoria categoria;
