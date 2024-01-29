@@ -4,7 +4,7 @@ import org.apache.catalina.User;
 
 public enum UserRole {
 
-    GERENTE("gerente"),
+    ADMIN("admin"),
     USER("user");
 
     private String role;
