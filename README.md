@@ -87,7 +87,7 @@ DELETE /pessoa/{id} - Deletar uma pessoa
 }
 ```
 
-**API PESSOA**
+**API VENDA**
 ```markdown
 POST /venda - Criar uma nova venda
 GET /venda - Listar todas as venda
