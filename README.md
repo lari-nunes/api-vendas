@@ -17,7 +17,7 @@ Este projeto é uma API que permite cadastrar clientes, categorias, produtos e s
 1. Clone o repositório:
 
 ```bash
-git clone https://github.com/Fernanda-Kipper/desafio-anotaai-backend.git
+git clone https://github.com/lari-nunes/api-vendas.git
 ```
 
 2. Instale dependências com Maven
