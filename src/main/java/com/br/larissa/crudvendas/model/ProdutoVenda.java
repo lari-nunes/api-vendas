@@ -30,5 +30,5 @@ public class ProdutoVenda implements Serializable {
     private Venda venda;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    private Produto produto;
+    private Product produto;
 }

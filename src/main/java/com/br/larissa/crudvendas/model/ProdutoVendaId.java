@@ -21,5 +21,5 @@ public class ProdutoVendaId implements Serializable {
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_produto")
-    private Produto produto;
+    private Product produto;
 }

@@ -17,7 +17,9 @@ package com.br.larissa.crudvendas.controller;
 
 
 import com.br.larissa.crudvendas.dto.AuthenticationDTO;
+import com.br.larissa.crudvendas.dto.LoginResponseDTO;
 import com.br.larissa.crudvendas.dto.RegisterDTO;
+import com.br.larissa.crudvendas.infra.security.TokenService;
 import com.br.larissa.crudvendas.model.User;
 import com.br.larissa.crudvendas.repository.UserRepository;
 import jakarta.validation.Valid;
@@ -41,11 +43,15 @@ public class AuthenticationController {
     @Autowired
     private AuthenticationManager authenticationManager;
 
+    @Autowired
+    TokenService tokenService;
+
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody @Valid AuthenticationDTO data){
         var usernamePassword = new UsernamePasswordAuthenticationToken(data.login(), data.password());
         var auth = this.authenticationManager.authenticate(usernamePassword);
-        return ResponseEntity.ok().build();
+        var token = tokenService.generateToken((User) auth.getPrincipal());
+        return ResponseEntity.ok(new LoginResponseDTO(token));
     }
 
     @PostMapping("/register")

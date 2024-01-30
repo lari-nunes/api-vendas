@@ -1,9 +1,10 @@
 package com.br.larissa.crudvendas.service;
 
 import com.br.larissa.crudvendas.exception.PrecoProdutoNuloException;
+import com.br.larissa.crudvendas.model.Product;
 import com.br.larissa.crudvendas.model.Produto;
 import com.br.larissa.crudvendas.model.ProdutoVenda;
-import com.br.larissa.crudvendas.repository.ProdutoRepository;
+
 import com.br.larissa.crudvendas.repository.ProdutoVendaRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,13 +33,12 @@ public class ProdutoVendaService {
 
     public void calcularValorTotal(ProdutoVenda produtoVenda)  {
         if (produtoVenda.getProduto() != null) {
-            Optional<Produto> precoProduto = produtoService.buscarProdutoId(produtoVenda.getProduto().getId_produto());
-            Produto produto = precoProduto.get();
-            Double preco = produto.getVl_preco();
+            Optional<Product> precoProduto = produtoService.buscarProdutoId(String.valueOf(produtoVenda.getProduto().getPrice()));
+            Product product = precoProduto.get();
+            Double preco = Double.valueOf(product.getPrice());
             produtoVenda.setVl_unitario(preco);
             if(preco == null){
                 throw new PrecoProdutoNuloException("O preço do produto é null.");
-
             }
             produtoVenda.setVl_total(produtoVenda.getQt_produto() * preco);
             produtoVenda.getVl_total();
@@ -51,15 +51,15 @@ public class ProdutoVendaService {
         return produtoVendaRepository.findAll();
     }
 
-//    public Optional<ProdutoVenda> buscarProdutoVendaId(Integer id){
-//        return produtoVendaRepository.findById(id);
-//    }
-//
-//    public Optional<ProdutoVenda> atualizarProdutoVendaId(Integer id){
-//        return produtoVendaRepository.findById(id);
-//    }
-//
-//    public void deletarProdutoVenda(Optional<ProdutoVenda> produtoVenda){
-//        produtoVendaRepository.delete(produtoVenda.get());
-//    }
+    public Optional<ProdutoVenda> buscarProdutoVendaId(Integer id){
+        return produtoVendaRepository.findById(id);
+    }
+
+    public Optional<ProdutoVenda> atualizarProdutoVendaId(Integer id){
+        return produtoVendaRepository.findById(id);
+    }
+
+    public void deletarProdutoVenda(Optional<ProdutoVenda> produtoVenda){
+        produtoVendaRepository.delete(produtoVenda.get());
+    }
 }
