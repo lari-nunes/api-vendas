@@ -2,13 +2,10 @@ package com.br.larissa.crudvendas.service;
 
 import com.br.larissa.crudvendas.exception.PrecoProdutoNuloException;
 import com.br.larissa.crudvendas.model.Product;
-import com.br.larissa.crudvendas.model.Produto;
 import com.br.larissa.crudvendas.model.ProdutoVenda;
 
 import com.br.larissa.crudvendas.repository.ProdutoVendaRepository;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
